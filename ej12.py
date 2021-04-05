@@ -2,12 +2,6 @@
 #es que dado una estructura que dice que celdas tienen minas y que celdas no las tienen, como
 #la siguiente:
 
-campo = """
-'-*-*-',
-'--*--',
-'----*',
-'*----',
-"""
 def sumar_en_minas (numeros, y, x):
     """ recibe numeros, Y y X, y en base a la posicion de la mina, asigna en sus posibles alrededores,
     sin irse de los límites, +1 en "numeros" a todos los casilleros aledaños. Y en el lugar de la mina, 
@@ -25,7 +19,7 @@ def sumar_en_minas (numeros, y, x):
                 numeros[y+1][x] += 1
             if type(numeros[y+1][x+1]) == int:
                 numeros[y+1][x+1] += 1
-        elif x == len(numeros):  #arriba a la derecha
+        elif x == (len(numeros)-1):  #arriba a la derecha
             numeros[y][x] = '*'
             if type(numeros[y][x-1]) == int:
                 numeros[y][x-1] += 1
@@ -45,7 +39,7 @@ def sumar_en_minas (numeros, y, x):
                 numeros[y+1][x] += 1
             if type(numeros[y+1][x+1]) == int:
                 numeros[y+1][x+1] += 1
-    elif y == len(numeros):
+    elif y == (len(numeros)-1):
         if x == 0:                  #abajo a la izquierda
             numeros[y][x] = '*'
             if type(numeros[y][x+1]) == int:
@@ -118,18 +112,21 @@ def sumar_en_minas (numeros, y, x):
             if type(numeros[y+1][x+1]) == int:
                 numeros[y+1][x+1] += 1
 
+campo = [ '-*-*-',
+        '--*--',
+        '----*',
+        '*----']
 
-lineas = campo.split('\n')
+#numeros = [[0]*5]*4
 numeros = [ [0,0,0,0,0], 
             [0,0,0,0,0], 
             [0,0,0,0,0], 
-            [0,0,0,0,0], 
             [0,0,0,0,0]]
-minas = [   ['-','*','-','*','-'], 
-            ['-','-','*','-','-'], 
-            ['-','-','-','-','-'], 
-            ['-','-','-','-','*'], 
-            ['*','-','-','-','-']]
+minas = [list(fila) for fila in campo]
+#minas = [   ['-','*','-','*','-'], 
+#            ['-','-','*','-','-'], 
+#            ['-','-','-','-','*'], 
+#            ['*','-','-','-','-']]
 
 fila = 0
 for renglon in minas:
@@ -144,6 +141,3 @@ for renglon in numeros:
     for char in renglon:
         reng += str(char) + ' '
     print(reng)
-
-
-
