@@ -15,13 +15,12 @@ arc_netflix = open("netflix_titles.csv", "r", encoding='utf-8')
 
 csvreader = csv.reader(arc_netflix, delimiter=',')
 lista =[]
-for pais in csvreader:
-    lista.append(pais[5])
-top_5 = Counter(lista).most_common(5)
+#for pais in csvreader:
+#    lista.append(pais[5])
+top_5 = Counter(list(map(lambda x: x[5], csvreader))).most_common(5)
 print("Los 5 paises que más películas produjeron son: ")
 
-for p in top_5:
-    print(p)
+print(*top_5, sep='\n')
 #No sé por qué toma un espacio vacío "" como País, quizás no le estoy pudiendo indicar bien
 #cuándo terminar y cuenta hasta vaya uno a saber donde.
 
